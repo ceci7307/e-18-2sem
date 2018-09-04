@@ -19,6 +19,11 @@
             margin: 0 auto;
             display:grid;
         }
+
+        #modal img{
+            max-width: 250px;
+        }
+
        @media screen and (min-width:580px){
             .data-container{
                 padding-left:10%;
@@ -26,9 +31,15 @@
                 grid-gap: 5px;
                 grid-template-columns: repeat(3, 1fr);
             }
+
+           #modal img{
+            max-width: 400px;
+        }
         }
 
+
         #modal {
+            top: 0;
             width: 100vw;
             height: 100vh;
             position: fixed;
@@ -47,6 +58,8 @@
         #modal.vis {
             display: block;
         }
+
+
 
     </style>
 </head>
@@ -117,7 +130,7 @@
                 klon.querySelector("h2").textContent = person.navn;
                 klon.querySelector("img").src = person.billede;
                 klon.querySelector("img").addEventListener("click", ()=>{
-                   visModal();
+                   visModal(person);
                 });
                 klon.querySelector(".data-civilstatus").textContent = person.civilstatus;
                 //placer klon i DOM
@@ -126,9 +139,12 @@
            } )
        }
 
-       function visModal(){
+       function visModal(personen){
            let modal = document.querySelector("#modal");
            modal.classList.add("vis");
+           modal.querySelector(".modal-navn").textContent=personen.navn;
+           modal.querySelector(".modal-billede").src=personen.billede;
+           modal.querySelector(".modal-billede").alt="Foto af" + personen.navn;
            modal.querySelector("button").addEventListener("click", skjulModal);
 
        }
